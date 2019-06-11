@@ -3,9 +3,9 @@ var tableData = data;
 
 // YOUR CODE HERE!
 // Select the submit button
-var filter = d3.select("#filter");
+var submit = d3.select("#filter-btn");
 
-filter.on("click", function() {
+submit.on("click", function() {
 
   // Prevent the page from refreshing
   d3.event.preventDefault();
@@ -22,6 +22,19 @@ filter.on("click", function() {
   var filteredData = tableData.filter(tableData => tableData.datetime === inputValue);
 
   console.log(filteredData);
+
+  function renderTable () {
+    for (var i = 0; i < tableData.length; i++) {
+      var datos = tableData[i];
+      var fields = Object.keys(datos);
+      var row = table.insertRow(i);
+      for (var j=0; j < fields.length; j++){
+        var celda = row.insertCell(j);
+        celda.innerHTML = datos[fields[j]];
+      }
+      
+    }
+  };
 
   // Array with the values
   var day = filteredData.map(tableData => tableData.datetime);
@@ -42,3 +55,4 @@ filter.on("click", function() {
     .append("li").text(`Duration in minutes: ${time}`)
     .append("li").text(`Comments: ${extra}`);
 });
+renderTable();
