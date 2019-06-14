@@ -24,12 +24,11 @@ submit.on("click", function() {
   console.log(filteredData);
 
   var tbody = d3.select("tbody");
-  data.forEach((date) => {
+  filteredData.forEach((date) => {
     var row = tbody.append("tr");
     Object.entries(date).forEach(([key, value]) => {
       var cell = tbody.append("td");
       cell.text(value);
     });
   });
-
 });
